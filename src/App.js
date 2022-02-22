@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react'
+import Header from './components/Header'
+import FeedBackList from './components/FeedBackList'
+import FeedBackData from './data/FeedbackData'
+import FeedBackStats from './components/FeedBackStats'
 
 function App() {
+  const [feedback, setFeedback] = useState(FeedBackData)
+
+  const deleteFeedback = (id) => {
+    if (window.confirm('Are you sure you want to delete this feedback')) {
+      setFeedback((prevFeedback) =>
+        prevFeedback.filter((item) => item.id != id)
+      )
+    }
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <Header />
+      <div className="container">
+        <FeedBackStats feedback={feedback} />
+        <FeedBackList feedback={feedback} handleDelete={deleteFeedback} />
+      </div>
+    </>
+  )
 }
 
-export default App;
+export default App
