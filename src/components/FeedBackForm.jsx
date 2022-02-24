@@ -13,7 +13,7 @@ function FeedBackForm() {
         useContext(FeedbackContext)
 
     useEffect(() => {
-        if (feedbackEdit.edit == true) {
+        if (feedbackEdit.edit === true) {
             setBtnDisabled(false)
             setText(feedbackEdit.item.text)
             setRating(feedbackEdit.item.rating)
@@ -21,7 +21,7 @@ function FeedBackForm() {
     }, [feedbackEdit])
 
     const handleTextChange = (e) => {
-        if (text == '') {
+        if (text === '') {
             setBtnDisabled(true)
             setMessage(null)
         } else if (text !== '' && text.trim().length <= 10) {
@@ -40,7 +40,7 @@ function FeedBackForm() {
         if (text.trim().length > 10) {
             const newFeedback = { text, rating }
 
-            if (feedbackEdit.edit == true) {
+            if (feedbackEdit.edit === true) {
                 updateFeedback(newFeedback)
             } else {
                 addFeedback(newFeedback)
